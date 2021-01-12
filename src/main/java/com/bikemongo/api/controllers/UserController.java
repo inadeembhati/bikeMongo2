@@ -95,7 +95,7 @@ public class UserController {
 
 	}
 	
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@DeleteMapping("/users/deleteAll")
 	public String deleteAll() {
 		userRepository.deleteAll();

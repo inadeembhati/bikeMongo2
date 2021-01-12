@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -73,7 +74,7 @@ public class BikeController {
 	public Bike updateBike(@PathVariable String id, @RequestBody Bike bike) {
 
 		Bike _bike = bikeRepository.findById(id).get();
-		
+
 		_bike.setBuyerName(bike.getBuyerName());
 		_bike.setEmail(bike.getEmail());
 		_bike.setModel(bike.getModel());
@@ -85,6 +86,7 @@ public class BikeController {
 		return bikeRepository.save(_bike);
 	}
 	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@DeleteMapping("/deleteAll")
 	public String deleteAll() {
 		bikeRepository.deleteAll();
