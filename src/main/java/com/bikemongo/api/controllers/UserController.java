@@ -131,8 +131,7 @@ public class UserController {
 		List<String> roles = userDetails.getAuthorities().stream().map(item -> item.getAuthority())
 				.collect(Collectors.toList());
 
-		// return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getId(), userDetails.getEmail(), roles.get(0)));
-		return ResponseEntity.ok(roles.get(0));
+		return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getId(), userDetails.getEmail(), roles));
 
 	}
 	
